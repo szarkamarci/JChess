@@ -24,8 +24,7 @@ public class Tile {
 
 
     //This is the only method that anyone can use to create a Tile
-    //If the classes want an empty tile they are going to get a EMPTY_TILES_CACHE otherwise...
-    //.. they are going to get an OccupiedTile.
+    //If the piece is NOT null it will return OccupiedTile otherwise EMPTY_TILES_CACHE
     public static Tile createTile(final int tileCoordinate, final Piece piece){
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
