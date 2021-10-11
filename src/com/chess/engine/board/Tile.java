@@ -10,6 +10,7 @@ public class Tile {
         this.tileCoordinate = tileCoordinate;
     }
 
+    //abstract methods
     public abstract boolean isTileOccupied();
 
     public abstract Piece getPiece();
