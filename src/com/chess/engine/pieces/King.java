@@ -1,5 +1,6 @@
 package com.chess.engine.pieces;
 
+import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
@@ -13,7 +14,7 @@ import java.util.List;
 public class King extends Piece{
     private final static int[] CANDIDATE_MOVE_COORDINATES = { 9, 8, 7, 1, -1, -7, -8, -9 };
 
-    King(int piecePosition, Alliance pieceAlliance) {
+    public King(Alliance pieceAlliance, int piecePosition) {
         super(piecePosition, pieceAlliance);
     }
 
@@ -34,13 +35,13 @@ public class King extends Piece{
             if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if(!candidateDestinationTile.isTileOccupied()){ // is there anything on the desired destination?
-                    legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));
+                    legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));//where to be moved
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
-                    if (this.pieceAlliance != pieceAlliance) { // if its occupied, is it the same color? if not then...
-                        legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                    if (this.pieceAlliance != pieceAlliance) { // if its occupied, is it the same colour? if not then...
+                        legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));//if its not the same colour
                     }
                 }
             }
@@ -48,6 +49,10 @@ public class King extends Piece{
         }
         return ImmutableList.copyOf(legalMoves);
     }
+    @Override
+    public String toString(){
+        return PieceType.KING.toString();
+        }
         private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 ||
                 candidateOffset == 7);

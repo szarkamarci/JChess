@@ -1,5 +1,6 @@
 package com.chess.engine.pieces;
 
+import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
@@ -14,7 +15,7 @@ public class Knight extends Piece {
 
     private final static int[] CANDIDATE_MOVE_COORDINATES= {-17, -15, -10, -6, 6, 10, 15, 17}; //possible moves knight
 
-    Knight(int piecePosition, Alliance pieceAlliance) { //destructor
+    public Knight(Alliance pieceAlliance, int piecePosition) { //destructor
         super(piecePosition, pieceAlliance);
     }
 
@@ -55,6 +56,10 @@ public class Knight extends Piece {
          return ImmutableList.copyOf(legalMoves);
     }
 
+    @Override
+    public String toString(){
+        return PieceType.KNIGHT.toString();
+        }
 
     //knight rules if it is in the first column, second, seventh, eight
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
