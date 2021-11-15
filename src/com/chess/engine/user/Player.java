@@ -1,12 +1,13 @@
-package com.chess.engine.player;
+package com.chess.engine.user;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.pieces.King;
 import com.chess.engine.pieces.Piece;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -119,7 +120,7 @@ public abstract class Player {
 
     //information about alliance etc.
     public abstract Collection<Piece> getActivePieces();
-    public abstract Alliance getAlliance();
+    public abstract Color getAlliance();
     public abstract Player getOpponent();
     protected abstract Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentsLegals);
 }

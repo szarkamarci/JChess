@@ -1,6 +1,6 @@
 package com.chess.engine.pieces;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
@@ -15,8 +15,8 @@ public class Queen extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9,-8, -7, -1, 1, 7, 8, 9 };
 
-    public Queen(Alliance pieceAlliance, int piecePosition) {
-        super(PieceType.QUEEN,piecePosition, pieceAlliance);
+    public Queen(Color pieceColor, int piecePosition) {
+        super(PieceType.QUEEN,piecePosition, pieceColor);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class Queen extends Piece{
                         legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                     } else {
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                        final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
+                        final Color pieceColor = pieceAtDestination.getPieceAlliance();
 
-                        if (this.pieceAlliance != pieceAlliance) { // if it is occupied, is it the same color? if not then...
+                        if (this.pieceColor != pieceColor) { // if it is occupied, is it the same color? if not then...
                             legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                         }
                         break;

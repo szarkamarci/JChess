@@ -1,6 +1,6 @@
-package com.chess.engine.player;
+package com.chess.engine.user;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
@@ -24,8 +24,8 @@ public class BlackPlayer extends Player {
     }
 
     @Override
-    public Alliance getAlliance() {
-        return Alliance.BLACK;
+    public Color getAlliance() {
+        return Color.BLACK;
     }
 
     @Override
@@ -63,7 +63,10 @@ public class BlackPlayer extends Player {
                     !this.board.getTile(3).isTileOccupied()) {
 
                 final Tile rookTile = this.board.getTile(0);
-                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
+                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove() &&
+                    Player.calculateAttacksOnTile(2, opponentsLegals).isEmpty() &&
+                    Player.calculateAttacksOnTile(3, opponentsLegals).isEmpty() &&
+                    rookTile.getPiece().getPieceType().isRook()) {
 
                     kingCastles.add(new Move.QueenSideCastleMove(this.board,
                                                                 this.playerKing,

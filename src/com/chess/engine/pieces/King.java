@@ -1,6 +1,6 @@
 package com.chess.engine.pieces;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
@@ -14,8 +14,8 @@ import java.util.List;
 public class King extends Piece{
     private final static int[] CANDIDATE_MOVE_COORDINATES = { 9, 8, 7, 1, -1, -7, -8, -9 };
 
-    public King(final Alliance pieceAlliance,final int piecePosition) {
-        super(PieceType.KING, piecePosition, pieceAlliance);
+    public King(final Color pieceColor, final int piecePosition) {
+        super(PieceType.KING, piecePosition, pieceColor);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class King extends Piece{
                     legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));//where to be moved
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                    final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
+                    final Color pieceColor = pieceAtDestination.getPieceAlliance();
 
-                    if (this.pieceAlliance != pieceAlliance) { // if its occupied, is it the same colour? if not then...
+                    if (this.pieceColor != pieceColor) { // if its occupied, is it the same colour? if not then...
                         legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));//if its not the same colour
                     }
                 }

@@ -1,4 +1,4 @@
-package com.chess.engine.player;
+package com.chess.engine.user;
 
 public enum MoveStatus {
     DONE {
@@ -9,16 +9,16 @@ public enum MoveStatus {
     },
     ILLEGAL_MOVE {
         @Override
-        boolean isDone() {
+        public boolean isDone() {
             return false;
         }
     },
     LEAVES_PLAYER_IN_CHECK {
         @Override
-        boolean isDone() {
+       public boolean isDone() {
             return false;
         }
     };
 
-    abstract boolean isDone();
+    public abstract boolean isDone();
 }

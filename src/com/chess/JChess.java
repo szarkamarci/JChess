@@ -1,7 +1,7 @@
 package com.chess;
 
 import com.chess.engine.board.Board;
-import com.chess.gui.Table;
+import com.chess.gui.Interface;
 
 public class JChess {
     public static void main(String[] args) {
@@ -9,6 +9,6 @@ public class JChess {
 
         System.out.println(board);
 
-        Table table = new Table();
+        Interface anInterface = new Interface();
     }
 }

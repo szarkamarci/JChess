@@ -1,6 +1,6 @@
-package com.chess.engine.player;
+package com.chess.engine.user;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
@@ -22,8 +22,8 @@ public class WhitePlayer extends Player {
      return this.board.getWhitePieces();
     }
 
-    public Alliance getAlliance(){
-     return Alliance.WHITE;
+    public Color getAlliance(){
+     return Color.WHITE;
     }
 
     @Override
@@ -61,7 +61,10 @@ public class WhitePlayer extends Player {
                !this.board.getTile(57).isTileOccupied()){
 
                 final Tile rookTile = this.board.getTile(56);
-                if(rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()){
+                if(rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove() &&
+                    Player.calculateAttacksOnTile(58, opponentsLegals).isEmpty() &&
+                    Player.calculateAttacksOnTile(59, opponentsLegals).isEmpty() &&
+                    rookTile.getPiece().getPieceType().isRook()){
 
                     kingCastles.add(new Move.QueenSideCastleMove(this.board,
                                                                 this.playerKing,

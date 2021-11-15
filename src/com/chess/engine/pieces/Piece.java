@@ -1,6 +1,6 @@
 package com.chess.engine.pieces;
 
-import com.chess.engine.Alliance;
+import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 
@@ -9,14 +9,14 @@ import java.util.Collection;
 public abstract class Piece {
     protected final PieceType pieceType;
     protected final int piecePosition;
-    protected final Alliance pieceAlliance;
-    protected final boolean isFirstMove;
+    protected final Color pieceColor;
+    public static boolean isFirstMove;
     private final int cachedHashCode;
 
     Piece(final PieceType pieceType,
           final int piecePosition,
-          final Alliance pieceAlliance) {
-     this.pieceAlliance = pieceAlliance;
+          final Color pieceColor) {
+     this.pieceColor = pieceColor;
      this.piecePosition = piecePosition;
      this.pieceType = pieceType;
      //TODO more work here
@@ -27,7 +27,7 @@ public abstract class Piece {
     private int computeHashCode() {
         //returns the object in a memory as an integer
         int result = pieceType.hashCode();
-        result = 31 * result * pieceAlliance.hashCode();
+        result = 31 * result * pieceColor.hashCode();
         result = 31 * result + piecePosition;
         result = 31 * result + (isFirstMove ? 1 : 0);
         return result;
@@ -47,7 +47,7 @@ public abstract class Piece {
         }
         final Piece otherPiece = (Piece) other;
         return piecePosition == otherPiece.getPiecePosition() && pieceType == otherPiece.getPieceType() &&
-                pieceAlliance == otherPiece.getPieceAlliance() && isFirstMove == otherPiece.isFirstMove;
+                pieceColor == otherPiece.getPieceAlliance() && isFirstMove == otherPiece.isFirstMove;
     }
 
     @Override
@@ -59,9 +59,10 @@ public abstract class Piece {
         return this.piecePosition;
     }
 
-    public Alliance getPieceAlliance(){
-        return this.pieceAlliance;
+    public Color getPieceAlliance(){
+        return this.pieceColor;
     }
+
 
     public boolean isFirstMove(){
         return this.isFirstMove;

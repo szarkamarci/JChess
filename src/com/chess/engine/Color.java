@@ -1,10 +1,10 @@
 package com.chess.engine;
 
-import com.chess.engine.player.BlackPlayer;
-import com.chess.engine.player.Player;
-import com.chess.engine.player.WhitePlayer;
+import com.chess.engine.user.BlackPlayer;
+import com.chess.engine.user.Player;
+import com.chess.engine.user.WhitePlayer;
 
-public enum Alliance {
+public enum Color {
     WHITE{
         public int getDirection(){
             return -1;
@@ -24,6 +24,11 @@ public enum Alliance {
         public Player choosePlayer(final WhitePlayer whitePlayer,
                                    final BlackPlayer blackPlayer) {
             return whitePlayer;
+        }
+
+        @Override
+        public int getFacingDirection() {
+            return DOWN_ORIENTAL;
         }
     },
     BLACK{
@@ -46,6 +51,11 @@ public enum Alliance {
                                    final BlackPlayer blackPlayer) {
             return blackPlayer;
         }
+
+        @Override
+        public int getFacingDirection() {
+            return UP_ORIENTAL;
+        }
     };
 
     public abstract int getDirection();
@@ -54,4 +64,10 @@ public enum Alliance {
 
     public abstract Player choosePlayer(final WhitePlayer whitePlayer,
                                         final BlackPlayer blackPlayer);
+
+    public abstract int getFacingDirection();
+
+    private static final int UP_ORIENTAL = -1;
+
+    private static final int DOWN_ORIENTAL = 1;
 }
