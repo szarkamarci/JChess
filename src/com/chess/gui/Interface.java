@@ -1,7 +1,7 @@
 package com.chess.gui;
 
 import com.chess.engine.board.Board;
-import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.BoardValues;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
@@ -92,9 +92,10 @@ public class Interface {
         //and we also adding this JPanel in for method with this line "add(tilePanel);"
 
         BoardPanel() {
+            //GridLayout is a layout manager that lays out a container's components in a rectangular grid
             super(new GridLayout(8,8));
             this.boardTiles = new ArrayList<>();
-            for(int i = 0; i< BoardUtils.NUM_TILES; i++) {
+            for(int i = 0; i< BoardValues.NUM_TILES; i++) {
                 final TilePanel tilePanel = new TilePanel(this, i);
                 this.boardTiles.add(tilePanel);
                 add(tilePanel);
@@ -109,7 +110,10 @@ public class Interface {
                 tilePanel.drawTile(board);
                 add(tilePanel);
             }
+            //validate() performs relayout
             validate();
+            //When call to repaint method is made, it performs a request to erase
+            //and perform redraw of the component after a small delay in time.
             repaint();
         }
 
@@ -167,6 +171,7 @@ public class Interface {
                             playerMovedPiece = null;
 
                         }
+                        //SwingUtilities class has a function to help with GUI rendering tasks
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
@@ -226,15 +231,15 @@ public class Interface {
             }
         }
         private void assignTileColor(){
-            if(BoardUtils.FIRST_ROW[this.tileId] ||
-                    BoardUtils.THIRD_ROW[this.tileId] ||
-                    BoardUtils.FIFTH_ROW[this.tileId] ||
-                    BoardUtils.SEVENTH_ROW[this.tileId]){
+            if(BoardValues.FIRST_ROW[this.tileId] ||
+                    BoardValues.THIRD_ROW[this.tileId] ||
+                    BoardValues.FIFTH_ROW[this.tileId] ||
+                    BoardValues.SEVENTH_ROW[this.tileId]){
                 setBackground(this.tileId % 2 == 0 ? lightTile : brownTile);
-            } else if(BoardUtils.SECOND_ROW[this.tileId] ||
-                        BoardUtils.FOURTH_ROW[this.tileId] ||
-                        BoardUtils.SIXTH_ROW[this.tileId] ||
-                        BoardUtils.EIGHTH_ROW[this.tileId]){
+            } else if(BoardValues.SECOND_ROW[this.tileId] ||
+                        BoardValues.FOURTH_ROW[this.tileId] ||
+                        BoardValues.SIXTH_ROW[this.tileId] ||
+                        BoardValues.EIGHTH_ROW[this.tileId]){
                 setBackground(this.tileId % 2 != 0 ? lightTile : brownTile);
             }
 

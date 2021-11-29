@@ -2,7 +2,7 @@ package com.chess.engine.pieces;
 
 import com.chess.engine.Color;
 import com.chess.engine.board.Board;
-import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.BoardValues;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
@@ -30,7 +30,7 @@ public class Knight extends Piece {
 
         final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;// adding move
 
-            if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { //is it legal move?
+            if(BoardValues.isValidTileCoordinate(candidateDestinationCoordinate)) { //is it legal move?
 
                 if (isFirstColumnExclusion(this.piecePosition, currentCandidateOffset)|| //possible legal moves
                 isSecondColumnExclusion(this.piecePosition, currentCandidateOffset) ||
@@ -67,22 +67,22 @@ public class Knight extends Piece {
 
     //knight rules if it is in the first column, second, seventh, eight
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -17 || candidateOffset == -10 ||
+        return BoardValues.FIRST_COLUMN[currentPosition] && (candidateOffset == -17 || candidateOffset == -10 ||
                 candidateOffset == 6 || candidateOffset == 15);
     }
 
     private static boolean isSecondColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.SECOND_COLUMN[currentPosition] && (candidateOffset == -10 || candidateOffset == 6);
+        return BoardValues.SECOND_COLUMN[currentPosition] && (candidateOffset == -10 || candidateOffset == 6);
 }
 
 
     private static boolean isSeventhColumnExclusion(final int currentPosition, final int candidateOffset){
-       return BoardUtils.SEVENTH_COLUMN[currentPosition] && (candidateOffset == 10|| candidateOffset == -6);
+       return BoardValues.SEVENTH_COLUMN[currentPosition] && (candidateOffset == 10|| candidateOffset == -6);
 }
 
 
     private static boolean isEigthColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -15|| (candidateOffset == -6 ||
+        return BoardValues.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -15|| (candidateOffset == -6 ||
                 candidateOffset == 10) || candidateOffset ==17);
 }
 }

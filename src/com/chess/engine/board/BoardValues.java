@@ -1,6 +1,6 @@
 package com.chess.engine.board;
 
-public class BoardUtils {
+public class BoardValues {
 
     public static final boolean[] FIRST_COLUMN = initColumn(0);
     public static final boolean[] SECOND_COLUMN = initColumn(1);
@@ -20,7 +20,7 @@ public class BoardUtils {
     public static final int NUM_TILES_PER_ROW = 8;//Tiles per row
 
 
-    private BoardUtils() {
+    private BoardValues() {
         throw new RuntimeException("Exception");
     }
 

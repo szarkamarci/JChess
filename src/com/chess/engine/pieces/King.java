@@ -2,7 +2,7 @@ package com.chess.engine.pieces;
 
 import com.chess.engine.Color;
 import com.chess.engine.board.Board;
-import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.BoardValues;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
@@ -32,7 +32,7 @@ public class King extends Piece{
                     isEightColumnExclusion(this.piecePosition, currentCandidateOffset)){
                 continue;
             }
-            if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
+            if(BoardValues.isValidTileCoordinate(candidateDestinationCoordinate)){
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if(!candidateDestinationTile.isTileOccupied()){ // is there anything on the desired destination?
                     legalMoves.add(new Move.MajorMove(board,this, candidateDestinationCoordinate));//where to be moved
@@ -58,12 +58,12 @@ public class King extends Piece{
         return PieceType.KING.toString();
         }
         private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 ||
+        return BoardValues.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 ||
                 candidateOffset == 7);
     }
 
     private static boolean isEightColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 1 ||
+        return BoardValues.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 1 ||
                 candidateOffset == 9);
 }
 }

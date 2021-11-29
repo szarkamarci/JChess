@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.chess.engine.Color;
 import com.chess.engine.board.Board;
-import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.BoardValues;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Move.*;
 import com.google.common.collect.ImmutableList;
@@ -27,7 +27,7 @@ public class Pawn extends Piece {
 
 		for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATE ) {// Go thru legal moves
 			final int candidateDestinationCoordinate = this.piecePosition + (this.getPieceAlliance().getDirection() *currentCandidateOffset);
-			if(!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { // is it a legal move??
+			if(!BoardValues.isValidTileCoordinate(candidateDestinationCoordinate)) { // is it a legal move??
 				continue;
 			}
 			if(currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
@@ -35,8 +35,8 @@ public class Pawn extends Piece {
 			}
 			//checking pawn specified moves possibilities
 			else if(currentCandidateOffset == 16 && this.isFirstMove() &&
-				   ((BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) ||
-				   (BoardUtils.SEVENTH_ROW[this.piecePosition] && this.getPieceAlliance().isWhite()))) {
+				   ((BoardValues.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) ||
+				   (BoardValues.SEVENTH_ROW[this.piecePosition] && this.getPieceAlliance().isWhite()))) {
 				final int behindCandidateDestinationCoordinate = this.piecePosition + (this.pieceColor.getDirection() * 8);
 				if (!board.getTile(behindCandidateDestinationCoordinate).isTileOccupied() &&
 					!board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
@@ -45,8 +45,8 @@ public class Pawn extends Piece {
 			}
 			//checking pawn specified moves possibilities
 			else if(currentCandidateOffset == 7 &&
-					!(BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceColor.isWhite() ||
-					BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceColor.isBlack())) {
+					!(BoardValues.EIGHTH_COLUMN[this.piecePosition] && this.pieceColor.isWhite() ||
+					BoardValues.FIRST_COLUMN[this.piecePosition] && this.pieceColor.isBlack())) {
 				if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) { // is there anything on the desired destination?
 					final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
 					if(this.pieceColor != pieceOnCandidate.getPieceAlliance()) {
@@ -63,8 +63,8 @@ public class Pawn extends Piece {
 				}
 
 			else if(currentCandidateOffset == 9 &&
-					!(BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceColor.isBlack() ||
-					BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceColor.isWhite())) {
+					!(BoardValues.EIGHTH_COLUMN[this.piecePosition] && this.pieceColor.isBlack() ||
+					BoardValues.FIRST_COLUMN[this.piecePosition] && this.pieceColor.isWhite())) {
 				if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
 					final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
 					if(this.pieceColor != pieceOnCandidate.getPieceAlliance()) {
